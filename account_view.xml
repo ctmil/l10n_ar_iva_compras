@@ -18,6 +18,9 @@
 	              <field name="document_number" />
 	              <field name="monto_total" />
 	              <field name="monto_neto_gravado" />
+	              <field name="monto_iva_105" />
+	              <field name="monto_iva_21" />
+	              <field name="monto_iva_27" />
 		</tree>
 	</field>
     </record>

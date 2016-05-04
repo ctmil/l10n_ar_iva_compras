@@ -14,6 +14,9 @@ class account_reporte_iva_compras(models.Model):
         responsability_id = fields.Many2one('afip.responsability', string='Responsabilidad AFIP')
         document_number = fields.Char(string='CUIT')
 	monto_neto_gravado = fields.Float(string='Monto Neto Gravado') 
+	monto_iva_105 = fields.Float(string='Monto IVA 10.5%')
+	monto_iva_21 = fields.Float(string='Monto IVA 21%')
+	monto_iva_27 = fields.Float(string='Monto IVA 27%')
 	monto_total = fields.Float(string='Monto Total') 
 
 	@api.model
@@ -22,6 +25,9 @@ class account_reporte_iva_compras(models.Model):
 		self.search([]).unlink()
 		invoices = self.env['account.invoice'].search([('state','in',['open','paid']),('type','in',['in_refund','in_invoice'])])
 		for invoice in invoices:
+			monto_iva_105 = 0
+			monto_iva_21 = 0
+			monto_iva_27 = 0
 			if invoice.journal_id.code in ('CCA0005','CCB0005'):
 				doc_type = 'NC'
 			else:
@@ -39,4 +45,14 @@ class account_reporte_iva_compras(models.Model):
 				'monto_neto_gravado': invoice.amount_untaxed,
 				'monto_total': invoice.amount_total,
 				}
+			for tax_line in invoice.tax_line:
+				if '10.5%' in tax_line.tax_code_id.name:
+					monto_iva_105 = monto_iva_105 + tax_line.tax_amount	
+				if '21%' in tax_line.tax_code_id.name:
+					monto_iva_21 = monto_iva_21 + tax_line.tax_amount	
+				if '27%' in tax_line.tax_code_id.name:
+					monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
+			vals['monto_iva_105'] = monto_iva_105
+			vals['monto_iva_21'] = monto_iva_21
+			vals['monto_iva_27'] = monto_iva_27
 			self.create(vals)
