@@ -45,13 +45,14 @@ class account_reporte_iva_compras(models.Model):
 				'monto_neto_gravado': invoice.amount_untaxed,
 				'monto_total': invoice.amount_total,
 				}
-			for tax_line in invoice.tax_line:
-				if '10.5%' in tax_line.tax_code_id.name:
-					monto_iva_105 = monto_iva_105 + tax_line.tax_amount	
-				if '21%' in tax_line.tax_code_id.name:
-					monto_iva_21 = monto_iva_21 + tax_line.tax_amount	
-				if '27%' in tax_line.tax_code_id.name:
-					monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
+			if invoice.tax_line:
+				for tax_line in invoice.tax_line:
+					if '10.5%' in tax_line.tax_code_id.name:
+						monto_iva_105 = monto_iva_105 + tax_line.tax_amount	
+					if '21%' in tax_line.tax_code_id.name:
+						monto_iva_21 = monto_iva_21 + tax_line.tax_amount	
+					if '27%' in tax_line.tax_code_id.name:
+						monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
 			vals['monto_iva_105'] = monto_iva_105
 			vals['monto_iva_21'] = monto_iva_21
 			vals['monto_iva_27'] = monto_iva_27
