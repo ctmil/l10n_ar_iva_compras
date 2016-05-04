@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+
+    <record model ="ir.ui.view" id="view_cobranzas_report_tree">
+        <field name="name">cobranzas.report.tree</field>
+        <field name="model">account.reporte.cobranzas</field>
+        <field name="arch" type="xml">
+		<tree string="Reporte Cobranzas" version="7.0">
+	              <field name="date" />
+	              <field name="invoice_id" />
+	              <field name="journal_id" />
+	              <field name="period_id" />
+	              <field name="partner_id" />
+	              <field name="voucher_id" />
+	              <field name="check_id" />
+	              <field name="deposit_date" />
+	              <field name="bank_id" />
+	              <field name="check_amount" />
+	              <field name="cash_amount" />
+	              <field name="bank_amount" />
+		</tree>
+	</field>
+    </record>
+
+    <record id="view_cobranzas_report_filter" model="ir.ui.view">
+            <field name="name">cobranzas.report.list.select</field>
+            <field name="model">account.reporte.cobranzas</field>
+            <field name="arch" type="xml">
+                <search string="Search Reporte Cobranzas">
+		    <field name="date" />
+	            <group expand="1" string="Group By ...">
+	                   <filter string="Metodo de Pago" icon="terp-stage" domain="[]" context="{'group_by':'journal_id'}" />
+	                   <filter string="Cliente" icon="terp-stage" domain="[]" context="{'group_by':'partner_id'}" />
+        	           <filter string="Mes" icon="terp-go-month" domain="[]" context="{'group_by':'period_id'}" />
+        	           <filter string="Fecha" icon="terp-go-month" domain="[]" context="{'group_by':'date'}" />
+                    </group>
+               </search>
+            </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_cobranzas_reportview">
+        <field name="name">Reporte Cobranzas</field>
+        <field name="res_model">account.reporte.cobranzas</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <!-- field name="context">{'search_default_year':1,'search_default_month':1,'group_by':[]}</field -->
+        <field name="view_id" ref="view_cobranzas_report_tree" />
+        <field name="search_view_id" ref="view_cobranzas_report_filter" />
+    </record>
+
+
+    <menuitem
+            id="menu_cobranzas_report"
+            name="Informe Cobranzas"
+            parent="account.menu_finance_generic_reporting" sequence="4"
+	    action="action_cobranzas_reportview"	/>
+
+    <record model="ir.actions.act_window" id="action_iva_reportview">
+        <field name="name">Reporte IVA</field>
+        <field name="res_model">account.reporte.iva</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <!-- field name="context">{'search_default_year':1,'search_default_month':1,'group_by':[]}</field -->
+        <field name="view_id" ref="view_iva_report_tree" />
+        <!-- field name="search_view_id" ref="view_cobranzas_report_filter" / -->
+    </record>
+
+    <record model ="ir.ui.view" id="view_iva_report_tree">
+        <field name="name">iva.report.tree</field>
+        <field name="model">account.reporte.iva</field>
+        <field name="arch" type="xml">
+		<tree string="Reporte IVA" version="7.0">
+	              <field name="date" />
+	              <field name="invoice_id" />
+	              <field name="journal_id" />
+	              <field name="period_id" />
+	              <field name="partner_id" />
+	              <field name="responsability_id" />
+	              <field name="document_number" />
+	              <field name="monto_gravado" />
+	              <field name="monto_neto" />
+	              <field name="monto_iva" />
+	              <field name="monto_otros_impuestos" />
+	              <!-- field name="monto_total" / -->
+		</tree>
+	</field>
+    </record>
+
+    <menuitem
+            id="menu_iva_report"
+            name="Informe IVA"
+            parent="account.menu_finance_generic_reporting" sequence="5"
+	    action="action_iva_reportview"	/>
+
+
+    </data>
+</openerp>
