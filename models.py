@@ -13,6 +13,7 @@ class account_reporte_iva_compras(models.Model):
         partner_id = fields.Many2one('res.partner', string='Cliente/Proveedor')
         responsability_id = fields.Many2one('afip.responsability', string='Responsabilidad AFIP')
         document_number = fields.Char(string='CUIT')
+	monto_neto_gravado = fields.Float(string='Monto Neto Gravado') 
 	monto_total = fields.Float(string='Monto Total') 
 
 	@api.model
@@ -35,6 +36,7 @@ class account_reporte_iva_compras(models.Model):
 				'partner_id': invoice.partner_id.id,
 				'responsability_id': invoice.partner_id.responsability_id.id,
 				'document_number': invoice.partner_id.document_number,
+				'monto_neto_gravado': invoice.amount_untaxed,
 				'monto_total': invoice.amount_total,
 				}
 			self.create(vals)
