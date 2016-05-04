@@ -2,6 +2,24 @@
 <openerp>
     <data>
 
+    <record model ="ir.ui.view" id="view_iva_compras_report_tree">
+        <field name="name">iva.compras.report.tree</field>
+        <field name="model">account.reporte.iva.compras</field>
+        <field name="arch" type="xml">
+		<tree string="Reporte IVA Compras" version="7.0">
+	              <field name="doc_type" />
+	              <field name="date" />
+	              <field name="mes" />
+	              <field name="invoice_id" />
+	              <field name="period_id" />
+	              <field name="partner_id" />
+	              <field name="responsability_id" />
+	              <field name="document_number" />
+	              <field name="monto_total" />
+		</tree>
+	</field>
+    </record>
+
     <record model="ir.actions.act_window" id="action_iva_compras_reportview">
         <field name="name">Reporte IVA</field>
         <field name="res_model">account.reporte.iva.compras</field>
@@ -10,27 +28,6 @@
         <!-- field name="context">{'search_default_year':1,'search_default_month':1,'group_by':[]}</field -->
         <field name="view_id" ref="view_iva_compras_report_tree" />
         <!-- field name="search_view_id" ref="view_cobranzas_report_filter" / -->
-    </record>
-
-    <record model ="ir.ui.view" id="view_iva_report_tree">
-        <field name="name">iva.report.tree</field>
-        <field name="model">account.reporte.iva</field>
-        <field name="arch" type="xml">
-		<tree string="Reporte IVA" version="7.0">
-	              <field name="date" />
-	              <field name="invoice_id" />
-	              <field name="journal_id" />
-	              <field name="period_id" />
-	              <field name="partner_id" />
-	              <field name="responsability_id" />
-	              <field name="document_number" />
-	              <field name="monto_gravado" />
-	              <field name="monto_neto" />
-	              <field name="monto_iva" />
-	              <field name="monto_otros_impuestos" />
-	              <!-- field name="monto_total" / -->
-		</tree>
-	</field>
     </record>
 
     <menuitem

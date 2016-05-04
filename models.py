@@ -7,7 +7,7 @@ class account_reporte_iva_compras(models.Model):
         invoice_id = fields.Many2one('account.invoice', string='Comprobante')
         date = fields.Date(string="Fecha del comprobante")
 	mes = fields.Char(string='Mes Comprobante')
-	doc_type = fields.Selectioni(string='Tipo de Comprobante',selection=[('FAC','FAC'),('RET','RET'),('NC','NC')])
+	doc_type = fields.Selection(string='Tipo de Comprobante',selection=[('FAC','FAC'),('RET','RET'),('NC','NC')])
         period_id = fields.Many2one('account.period', string='Periodo Fiscal')
         partner_id = fields.Many2one('res.partner', string='Cliente/Proveedor')
         responsability_id = fields.Many2one('afip.responsability', string='Responsabilidad AFIP')
