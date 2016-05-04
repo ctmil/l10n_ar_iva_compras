@@ -4,6 +4,7 @@ class account_reporte_iva_compras(models.Model):
 	_name = "account.reporte.iva.compras"
 	_description = 'Reporte de IVA Compras'
 
+	mes_carga = fields.Char(string='Mes de carga')
         invoice_id = fields.Many2one('account.invoice', string='Comprobante')
         date = fields.Date(string="Fecha del comprobante")
 	mes = fields.Char(string='Mes Comprobante')
@@ -25,6 +26,7 @@ class account_reporte_iva_compras(models.Model):
 			else:
 				doc_type = 'FAC'
 			vals = {
+				'mes_carga': invoice.date_invoice[:7],
 				'invoice_id': invoice.id,
 				'date': invoice.date_invoice,
 				'doc_type': doc_type,

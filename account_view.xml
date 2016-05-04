@@ -7,6 +7,7 @@
         <field name="model">account.reporte.iva.compras</field>
         <field name="arch" type="xml">
 		<tree string="Reporte IVA Compras" version="7.0">
+	              <field name="mes_carga" />
 	              <field name="doc_type" />
 	              <field name="date" />
 	              <field name="mes" />
