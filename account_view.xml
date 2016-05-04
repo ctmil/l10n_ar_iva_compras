@@ -17,6 +17,7 @@
 	              <field name="responsability_id" />
 	              <field name="document_number" />
 	              <field name="monto_total" />
+	              <field name="monto_neto_gravado" />
 		</tree>
 	</field>
     </record>
