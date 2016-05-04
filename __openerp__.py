@@ -4,7 +4,7 @@
     'version': '0.1',
     'depends': ['base','account','account_voucher','l10n_ar_invoice'],
     'data': [
-	#'account_view.xml'
+	'account_view.xml'
     ],
     'demo': [
     ],
