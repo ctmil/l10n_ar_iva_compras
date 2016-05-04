@@ -23,7 +23,7 @@ class account_reporte_iva_compras(models.Model):
 			if invoice.journal_id.code in ('CCA0005','CCB0005'):
 				doc_type = 'NC'
 			else:
-				doct_type = 'FAC'
+				doc_type = 'FAC'
 			vals = {
 				'invoice_id': invoice.id,
 				'date': invoice.date_invoice,
