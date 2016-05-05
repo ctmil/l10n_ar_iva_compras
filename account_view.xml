@@ -21,6 +21,7 @@
 	              <field name="monto_iva_105" />
 	              <field name="monto_iva_21" />
 	              <field name="monto_iva_27" />
+	              <field name="monto_exento" />
 		</tree>
 	</field>
     </record>

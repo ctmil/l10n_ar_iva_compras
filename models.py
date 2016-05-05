@@ -19,6 +19,9 @@ class account_reporte_iva_compras(models.Model):
 	monto_iva_21 = fields.Float(string='Monto IVA 21%')
 	monto_iva_27 = fields.Float(string='Monto IVA 27%')
 	monto_total = fields.Float(string='Monto Total') 
+	monto_exento = fields.Float(string='Monto Exento')
+	monto_percepcion_iibb = fields.Float(string='Monto Perc. IIBB')
+	monto_percepcion_iva = fields.Float(string='Monto Perc. IVA')
 
 	@api.model
         def _update_reporte_iva_compras(self):
@@ -29,6 +32,7 @@ class account_reporte_iva_compras(models.Model):
 			monto_iva_105 = 0
 			monto_iva_21 = 0
 			monto_iva_27 = 0
+			monto_exento = 0
 			if invoice.journal_id.code in ('CCA0005','CCB0005'):
 				doc_type = 'NC'
 			else:
@@ -55,7 +59,10 @@ class account_reporte_iva_compras(models.Model):
 						monto_iva_21 = monto_iva_21 + tax_line.tax_amount	
 					if '27%' in tax_line.tax_code_id.name:
 						monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
+					if '0%' in tax_line.tax_code_id.name:
+						monto_exento = monto_exento + tax_line.tax_amount	
 			vals['monto_iva_105'] = monto_iva_105
 			vals['monto_iva_21'] = monto_iva_21
 			vals['monto_iva_27'] = monto_iva_27
+			vals['monto_exento'] = monto_exento
 			self.create(vals)
