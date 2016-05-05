@@ -66,7 +66,7 @@ class account_reporte_iva_compras(models.Model):
 					if 'iibb' in tax_line.tax_code_id.name.lower():
 						monto_percepcion_iibb = monto_percepcion_iibb + tax_line.tax_amount
 					if 'per' in tax_line.tax_code_id.name.lower() and 'iva' in tax_line.tax_code_id.name.lower():
-						monto_percepcion_iibb = monto_percepcion_iibb + tax_line.tax_amount
+						monto_percepcion_iva = monto_percepcion_iva + tax_line.tax_amount
 						
 			vals['monto_iva_105'] = monto_iva_105
 			vals['monto_iva_21'] = monto_iva_21
