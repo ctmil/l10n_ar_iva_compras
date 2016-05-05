@@ -72,4 +72,6 @@ class account_reporte_iva_compras(models.Model):
 			vals['monto_iva_21'] = monto_iva_21
 			vals['monto_iva_27'] = monto_iva_27
 			vals['monto_exento'] = monto_exento
+			vals['monto_percepcion_iibb'] = monto_percepcion_iibb
+			vals['monto_percepcion_iva'] = monto_percepcion_iva
 			self.create(vals)
