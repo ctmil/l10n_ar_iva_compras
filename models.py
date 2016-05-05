@@ -33,6 +33,8 @@ class account_reporte_iva_compras(models.Model):
 			monto_iva_21 = 0
 			monto_iva_27 = 0
 			monto_exento = 0
+			monto_percepcion_iibb = 0
+			monto_percepcion_iva = 0
 			if invoice.journal_id.code in ('CCA0005','CCB0005'):
 				doc_type = 'NC'
 			else:
@@ -61,6 +63,11 @@ class account_reporte_iva_compras(models.Model):
 						monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
 					if '0%' in tax_line.tax_code_id.name:
 						monto_exento = monto_exento + tax_line.base_amount	
+					if 'iibb' in tax_line.tax_code_id.name.lower():
+						monto_percepcion_iibb = monto_percepcion_iibb + tax_line.tax_amount
+					if 'per' in tax_line.tax_code_id.name.lower() and 'iva' in tax_line.tax_code_id.name.lower():
+						monto_percepcion_iibb = monto_percepcion_iibb + tax_line.tax_amount
+						
 			vals['monto_iva_105'] = monto_iva_105
 			vals['monto_iva_21'] = monto_iva_21
 			vals['monto_iva_27'] = monto_iva_27

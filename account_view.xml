@@ -22,6 +22,8 @@
 	              <field name="monto_iva_21" />
 	              <field name="monto_iva_27" />
 	              <field name="monto_exento" />
+	              <field name="monto_percepcion_iibb" />
+	              <field name="monto_percepcion_iva" />
 		</tree>
 	</field>
     </record>
