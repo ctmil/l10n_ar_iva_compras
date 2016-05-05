@@ -60,7 +60,7 @@ class account_reporte_iva_compras(models.Model):
 					if '27%' in tax_line.tax_code_id.name:
 						monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
 					if '0%' in tax_line.tax_code_id.name:
-						monto_exento = monto_exento + tax_line.tax_amount	
+						monto_exento = monto_exento + tax_line.base_amount	
 			vals['monto_iva_105'] = monto_iva_105
 			vals['monto_iva_21'] = monto_iva_21
 			vals['monto_iva_27'] = monto_iva_27
