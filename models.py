@@ -72,6 +72,7 @@ class account_reporte_iva_compras(models.Model):
 						monto_iva_27 = monto_iva_27 + tax_line.tax_amount	
 					if '0%' in tax_line.tax_code_id.name:
 						monto_exento = monto_exento + tax_line.base_amount	
+				if tax_line.name:
 					if 'IIBB' in tax_line.name or 'ii bb' in tax_line.name:
 						monto_percepcion_iibb = monto_percepcion_iibb + tax_line.tax_amount
 					if 'per' in tax_line.name and 'iva' in tax_line.name:
