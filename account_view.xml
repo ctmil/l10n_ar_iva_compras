@@ -29,9 +29,9 @@
 	              <field name="monto_retencion_iibbcor" />
 	              <field name="monto_retencion_iva" />
 	              <field name="monto_retencion_suss" />
-	              <field name="monto_retencion_stafe" />
-	              <field name="monto_retencion_stacruz" />
-	              <field name="monto_retencion_chubut" />
+	              <field name="monto_retencion_iibbstafe" />
+	              <field name="monto_retencion_iibbstacruz" />
+	              <field name="monto_retencion_iibbchubut" />
 	              <field name="monto_retencion_iibbba" />
 		</tree>
 	</field>
