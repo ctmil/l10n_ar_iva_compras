@@ -22,6 +22,15 @@ class account_reporte_iva_compras(models.Model):
 	monto_exento = fields.Float(string='Monto Exento')
 	monto_percepcion_iibb = fields.Float(string='Monto Perc. IIBB')
 	monto_percepcion_iva = fields.Float(string='Monto Perc. IVA')
+	monto_retencion_ganan = fields.Float(string='Retencion Ganancias')
+	monto_retencion_iibbmis = fields.Float(string='Retencion IIBB Misiones')
+	monto_retencion_iibbcor = fields.Float(string='Retencion IIBB Cordoba')
+	monto_retencion_iva = fields.Float(string='Retencion IVA')
+	monto_retencion_suss = fields.Float(string='Retencion SUSS')
+	monto_retencion_iibbstafe = fields.Float(string='Retencion IIBB Sta Fe')
+	monto_retencion_iibbstacruz = fields.Float(string='Retencion IIBB Santa Cruz')
+	monto_retencion_iibbchubut = fields.Float(string='Retencion IIBB Chubut')
+	monto_retencion_iibbba = fields.Float(string='Retencion IIBB Buenos Aires')
 
 	@api.model
         def _update_reporte_iva_compras(self):
@@ -77,3 +86,66 @@ class account_reporte_iva_compras(models.Model):
 			vals['monto_percepcion_iibb'] = monto_percepcion_iibb
 			vals['monto_percepcion_iva'] = monto_percepcion_iva
 			self.create(vals)
+		vouchers = self.env['account.voucher'].search([('state','in',['posted']),('type','in',['receipt'])])
+		for voucher in vouchers:
+			monto_retencion_ganan = 0
+			monto_retencion_iibbmis = 0
+			monto_retencion_iibbcor = 0
+			monto_retencion_iva = 0
+			monto_retencion_suss = 0
+			monto_retencion_iibbstafe = 0
+			monto_retencion_iibbstacruz = 0
+			monto_retencion_iibbchubut = 0
+			monto_retencion_iibbba = 0
+			create_record = False	
+			if voucher.journal_id.code == 'RET_GANAN':
+				monto_retencion_ganan = monto_retencion_ganan + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RETIIBBMIS':
+				monto_retencion_iibbmis = monto_retencion_iibbmis + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RETIIBBCOR':
+				monto_retencion_cor = monto_retencion_iibbcor + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RET_IVA':
+				monto_retencion_iva = monto_retencion_iva + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RET_SUSS':
+				monto_retencion_suss = monto_retencion_suss + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RETIIBBSTA':
+				monto_retencion_iibbstafe = monto_retencion_iibbstafe + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RETIIBBSCR':
+				monto_retencion_iibbstacruz = monto_retencion_iibbstacruz + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RETCHUBUT':
+				monto_retencion_iibbchubut = monto_retencion_iibbchubut + voucher.amount
+				create_record = True
+			if voucher.journal_id.code == 'RET_IIBBBA':
+				monto_retencion_iibbba = monto_retencion_iibbba + voucher.amount
+				create_record = True
+			vals = {
+				'mes_carga': voucher.create_date[:7],
+				'invoice_number': 'N/A',
+				'date': voucher.date,
+				'doc_type': 'RET',
+				'mes': voucher.date[:7],
+				'period_id': voucher.period_id.id,
+				'partner_id': voucher.partner_id.id,
+				'responsability_id': voucher.partner_id.responsability_id.id,
+				'document_number': voucher.partner_id.document_number,
+				'monto_total': 0,
+				'monto_retencion_ganan': monto_retencion_ganan,
+				'monto_retencion_iibbmis': monto_retencion_iibbmis,
+				'monto_retencion_iibbcor': monto_retencion_iibbcor,
+				'monto_retencion_iva': monto_retencion_iva,
+				'monto_retencion_suss': monto_retencion_suss,
+				'monto_retencion_iibbstafe': monto_retencion_iibbstafe,
+				'monto_retencion_iibbstacruz': monto_retencion_iibbstacruz,
+				'monto_retencion_iibbchubut': monto_retencion_iibbchubut,
+				'monto_retencion_iibbba': monto_retencion_iibbba,
+				}
+			if create_record:
+				self.create(vals)
+			
