@@ -6,7 +6,7 @@ class account_reporte_iva_compras(models.Model):
 
 	mes_carga = fields.Char(string='Mes de carga')
         invoice_id = fields.Many2one('account.invoice', string='Comprobante')
-	invoice_number = fields.Char(string='Nro. Factura')
+	invoice_number = fields.Char(string='Comprobante')
         date = fields.Date(string="Fecha del comprobante")
 	mes = fields.Char(string='Mes Comprobante')
 	doc_type = fields.Selection(string='Tipo de Comprobante',selection=[('FAC','FAC'),('RET','RET'),('NC','NC')])
@@ -128,7 +128,7 @@ class account_reporte_iva_compras(models.Model):
 				create_record = True
 			vals = {
 				'mes_carga': voucher.create_date[:7],
-				'invoice_number': 'N/A',
+				'invoice_number': voucher.reference,
 				'date': voucher.date,
 				'doc_type': 'RET',
 				'mes': voucher.date[:7],
