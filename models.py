@@ -106,7 +106,7 @@ class account_reporte_iva_compras(models.Model):
 				monto_retencion_iibbmis = monto_retencion_iibbmis + voucher.amount
 				create_record = True
 			if voucher.journal_id.code == 'RETIIBBCOR':
-				monto_retencion_cor = monto_retencion_iibbcor + voucher.amount
+				monto_retencion_iibbcor = monto_retencion_iibbcor + voucher.amount
 				create_record = True
 			if voucher.journal_id.code == 'RET_IVA':
 				monto_retencion_iva = monto_retencion_iva + voucher.amount
