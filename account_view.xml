@@ -2,6 +2,22 @@
 <openerp>
     <data>
 
+    <record id="view_iva_compras_report_filter" model="ir.ui.view">
+            <field name="name">iva.compras.report.filter</field>
+            <field name="model">account.reporte.iva.compras</field>
+            <field name="arch" type="xml">
+                <search string="Search Reporte IVA Compras">
+                    <field name="mes_carga" />
+                    <field name="period_id" />
+                    <group expand="0" string="Group By">
+                        <filter string="Mes Carga" domain="[]" context="{'group_by':'mes_carga'}"/>
+                        <filter string="Periodo" domain="[]" context="{'group_by':'period_id'}"/>
+                    </group>
+               </search>
+            </field>
+    </record>
+
+
     <record model ="ir.ui.view" id="view_iva_compras_report_tree">
         <field name="name">iva.compras.report.tree</field>
         <field name="model">account.reporte.iva.compras</field>
@@ -11,6 +27,7 @@
 	              <field name="doc_type" />
 	              <field name="doc_type_description" />
 	              <field name="date" />
+	              <field name="fecha_retencion" />
 	              <field name="mes" />
 	              <field name="invoice_number" />
 	              <field name="period_id" />
@@ -45,7 +62,7 @@
         <field name="view_mode">tree</field>
         <!-- field name="context">{'search_default_year':1,'search_default_month':1,'group_by':[]}</field -->
         <field name="view_id" ref="view_iva_compras_report_tree" />
-        <!-- field name="search_view_id" ref="view_cobranzas_report_filter" / -->
+        <field name="search_view_id" ref="view_iva_compras_report_filter" />
     </record>
 
     <menuitem

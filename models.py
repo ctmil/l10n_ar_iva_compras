@@ -8,6 +8,7 @@ class account_reporte_iva_compras(models.Model):
         invoice_id = fields.Many2one('account.invoice', string='Comprobante')
 	invoice_number = fields.Char(string='Comprobante')
         date = fields.Date(string="Fecha del comprobante")
+	fecha_retencion = fields.Date(string='Fecha Retencion')
 	mes = fields.Char(string='Mes Comprobante')
 	doc_type = fields.Selection(string='Tipo de Comprobante',selection=[('FAC','FAC'),('RET','RET'),('NC','NC')])
 	doc_type_description = fields.Char(string='Desc. Comprobante')
@@ -128,10 +129,15 @@ class account_reporte_iva_compras(models.Model):
 			if voucher.journal_id.code == 'RET_IIBBBA':
 				monto_retencion_iibbba = monto_retencion_iibbba + voucher.amount
 				create_record = True
+			if voucher.fecha_retencion:
+				fecha_retencion = voucher.fecha_retencion
+			else:
+				fecha_retencion = voucher.date
 			vals = {
 				'mes_carga': voucher.create_date[:7],
 				'invoice_number': voucher.reference,
 				'date': voucher.date,
+				'fecha_retencion': fecha_retencion,
 				'doc_type': 'RET',
 				'doc_type_description': 'Retencion',
 				'mes': voucher.date[:7],
