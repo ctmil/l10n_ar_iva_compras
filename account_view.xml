@@ -12,6 +12,7 @@
                     <group expand="0" string="Group By">
                         <filter string="Mes Carga" domain="[]" context="{'group_by':'mes_carga'}"/>
                         <filter string="Periodo" domain="[]" context="{'group_by':'period_id'}"/>
+                        <filter string="Factura Compra/Retencion" domain="[]" context="{'group_by':'doc_type'}"/>
                     </group>
                </search>
             </field>
